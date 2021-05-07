@@ -1,0 +1,16 @@
+{
+  "packages": [
+    "processes/**"
+  ],
+  "version": "0.0.1",
+  "npmClient": "yarn",
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "*.md"
+      ]
+    }
+  },
+  "useWorkspaces": true
+}
+

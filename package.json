@@ -1,0 +1,26 @@
+{
+  "name": "iiot-miniproject",
+  "version": "1.0.0",
+  "description": "Miniproject for IIoT lab",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "processes"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rymnc/iiot-miniproject.git"
+  },
+  "author": "rymnc <aaryamannchallani7@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rymnc/iiot-miniproject/issues"
+  },
+  "homepage": "https://github.com/rymnc/iiot-miniproject#readme",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
