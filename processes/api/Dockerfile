@@ -13,5 +13,5 @@ RUN yarn build:ts
 RUN chown -R node:node /app
 USER node
 
-CMD [ "yarn", "start:prod" ]
 EXPOSE 5000
+CMD [ "yarn", "start:prod" ]
