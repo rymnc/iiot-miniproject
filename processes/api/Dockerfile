@@ -14,4 +14,4 @@ RUN chown -R node:node /app
 USER node
 
 CMD [ "yarn", "start:prod" ]
-EXPOSE 3000
+EXPOSE 5000
