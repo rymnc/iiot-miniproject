@@ -16,9 +16,11 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     },
     async (request, reply) => {
         const {firstName, lastName, email} = request.body;
-        const newUser = {
-            firstName, lastName, email, isPremium: false,
-        }
+        const newUser = await fastify.db.user.create({
+            data: {
+              firstName, lastName, email
+            }
+        })
         return newUser
     })
 }

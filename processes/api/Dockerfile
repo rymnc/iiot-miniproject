@@ -6,11 +6,11 @@ COPY package.json .
 
 RUN yarn install
 
-COPY . .
+COPY --chown=node:node . .
 
 RUN yarn build:ts
+RUN npx prisma generate
 
-RUN chown -R node:node /app
 USER node
 
 EXPOSE 5000
