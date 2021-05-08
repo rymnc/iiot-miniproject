@@ -7,7 +7,12 @@ const User = Type.Object({
 });
 type UserType = Static<typeof User>;
 
+interface Get {
+  email: string
+}
+
 export {
-    UserType,
-    User,
+  UserType,
+  User,
+  Get,
 }
