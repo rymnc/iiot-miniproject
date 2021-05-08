@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgres://postgres:test_db@localhost:5432/"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          Int           @id @default(autoincrement())
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  firstName   String
+  lastName    String?
+  email       String
+  CardDetails CardDetails[]
+}
+
+model CardDetails {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int      @unique
+  cardNumber String
+  cardExpiry DateTime
+  cardCvv    Int
+  cardHolder String
+}
