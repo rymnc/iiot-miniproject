@@ -3,6 +3,9 @@ import {
   User,
   UserType,
   Get,
+  GetType,
+  Update,
+  UpdateType,
 } from './schemas'
 
 const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
@@ -10,7 +13,7 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     return { users: true }
   })
 
-  fastify.post<{ Body: UserType; Response: UserType }>('/create', {
+  fastify.post<{ Body: UserType; Response: UserType }>('/', {
     schema: {
       body: User,
       response: {
@@ -30,11 +33,9 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       reply.status(201).send(newUser)
     })
 
-  fastify.get<{Params: Get;}>('/:email', {
+  fastify.get<{Params: GetType;}>('/:email', {
     schema: {
-      // params: {
-      //   email: String,
-      // },
+      params: Get,
       response: {
         200: User,
       }
@@ -50,15 +51,13 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       if(user) {
         reply.status(200).send(user)
       } else {
-        reply.notFound()
+        reply.notFound("User not found")
       }
     })
 
-    fastify.delete<{Params: Get;}>('/:email', {
+    fastify.delete<{Params: GetType;}>('/:email', {
       schema: {
-        // params: {
-        //   email: 'String',
-        // },
+        params: Get,
         response: {
           200: {
             type: 'boolean',
@@ -76,9 +75,45 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         if(user) {
           reply.status(203).send(true)
         } else {
-          reply.notFound()
+          reply.notFound("User not found")
         }
       })
+
+      fastify.patch<{Params: GetType;Body: UpdateType}>('/:email', {
+        schema: {
+          params: Get,
+          body: Update,
+          response: {
+            200: User
+          }
+        },
+      },
+        async (request, reply) => {
+          const {email} = request.params;
+          const {firstName,lastName} = request.body;
+          const user = await fastify.db.user.findUnique({
+            where: {
+              email
+            }
+          })
+          if(!user) {
+            reply.notFound("User not found")
+          } else {
+            const fname = firstName ?? user.firstName
+            const lname = lastName ?? user.lastName
+            const updated = await fastify.db.user.update({
+              where: {
+                email
+              },
+              data: {
+                firstName: fname,
+                lastName: lname,
+              }
+            })
+            reply.status(200).send(updated)
+          }
+
+        })
 }
 
 export default users;
