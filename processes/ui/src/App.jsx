@@ -1,11 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import {useEffect} from 'react';
+import {apiClient} from './services/axios'
 
 function App() {
+
+  useEffect(()=>{
+    const pingBackend = async () => {
+      const reply = await apiClient.get()
+      console.log(reply)
+    }
+    pingBackend()
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
