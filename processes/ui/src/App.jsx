@@ -6,8 +6,8 @@ function App() {
 
   useEffect(()=>{
     const pingBackend = async () => {
-      const reply = await apiClient.get()
-      console.log(reply)
+      const {data} = await apiClient.get()
+      console.log(data)
     }
     pingBackend()
   }, [])

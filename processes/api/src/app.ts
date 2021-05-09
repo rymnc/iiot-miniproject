@@ -12,12 +12,7 @@ const app: FastifyPluginAsync<AppOptions> = async (
   void fastify.register(require('fastify-cors'), { 
     // put your options here
     origin: (origin: string, cb: (arg0: Error | null, arg1: boolean) => void) => {
-      if(/localhost/.test(origin)){
-        //  Request from localhost will pass
-        cb(null, true)
-        return
-      }
-      cb(new Error("Not allowed"), false)
+      cb(null, true)
     }
   })
   
