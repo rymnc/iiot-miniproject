@@ -1,12 +1,15 @@
 FROM node:14-alpine AS build
 WORKDIR /app
-COPY package.json ./
-RUN yarn install
 
 ARG REACT_APP_API_URL
 ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 
+COPY package.json .
+
+RUN yarn install --production=false
 COPY . .
+RUN rm /app/node_modules/.bin/react-scripts
+RUN ln -s /app/node_modules/react-scripts/bin/react-scripts.js /app/node_modules/.bin/react-scripts
 RUN yarn build
 
 
