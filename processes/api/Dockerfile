@@ -12,6 +12,11 @@ RUN yarn install
 COPY --chown=node:node . .
 
 RUN yarn build:ts
+
+RUN rm -rf node_modules
+RUN yarn cache clean
+
+RUN yarn install --production
 RUN npx prisma generate
 
 FROM node:14-alpine 
