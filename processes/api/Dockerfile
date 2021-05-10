@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:14-alpine as builder
 
 ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
@@ -13,6 +13,15 @@ COPY --chown=node:node . .
 
 RUN yarn build:ts
 RUN npx prisma generate
+
+FROM node:14-alpine 
+
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
+
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
 USER node
 
