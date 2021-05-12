@@ -10,24 +10,48 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id          Int           @id @default(autoincrement())
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @default(now())
-  firstName   String
-  lastName    String?
-  email       String        @unique
-  CardDetails CardDetails[]
+enum DeviceTypes {
+  SENSOR
+  ASSISTANT
+  AUTOMATION
+  SECURITY
 }
 
-model CardDetails {
-  id         Int      @id @default(autoincrement())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now())
-  user       User     @relation(fields: [userId], references: [id])
-  userId     Int      @unique
-  cardNumber String
-  cardExpiry DateTime
-  cardCvv    Int
-  cardHolder String
+enum TokenType {
+  REFRESH
+  ACCESS
+}
+
+model User {
+  id            Int             @id @default(autoincrement())
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @default(now())
+  firstName     String
+  lastName      String?
+  email         String          @unique
+  password      String
+  DeviceDetails DeviceDetails[]
+  Tokens        Tokens[]
+}
+
+model DeviceDetails {
+  id         Int         @id @default(autoincrement())
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @default(now())
+  user       User        @relation(fields: [userId], references: [id])
+  userId     Int        
+  deviceId   String      @default(uuid())
+  deviceType DeviceTypes
+  healthy    Boolean     @default(true)
+}
+
+// Using an entity in db instead of storing these in cache/redis
+model Tokens {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int      
+  type      TokenType
+  value     String    @unique
 }

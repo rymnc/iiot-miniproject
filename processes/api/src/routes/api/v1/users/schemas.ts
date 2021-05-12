@@ -4,13 +4,16 @@ const User = Type.Object({
   firstName: Type.String(),
   lastName: Type.String(),
   email: Type.String({ format: "email" }),
+  password: Type.String(),
 });
 type UserType = Static<typeof User>;
 
-const Get = Type.Object({
+const NewUser = Type.Object({
+  firstName: Type.String(),
+  lastName: Type.String(),
   email: Type.String({ format: "email" }),
 });
-type GetType = Static<typeof Get>;
+type NewUserType = Static<typeof NewUser>;
 
 const Update = Type.Object({
   firstName: Type.Optional(Type.String()),
@@ -19,4 +22,4 @@ const Update = Type.Object({
 });
 type UpdateType = Static<typeof Update>;
 
-export { UserType, User, Get, GetType, Update, UpdateType };
+export { UserType, User, Update, UpdateType, NewUser, NewUserType };

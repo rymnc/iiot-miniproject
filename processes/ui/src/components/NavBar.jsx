@@ -16,7 +16,6 @@ const NavBar = () => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav activeKey={window.location.pathname} className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/cards">Cards</Nav.Link>
           <Nav.Link href="/devices">Devices</Nav.Link>
           <Nav.Link href="/user">User</Nav.Link>
         </Nav>
