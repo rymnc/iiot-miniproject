@@ -6,7 +6,7 @@ import { apiClient } from '../../services/axios'
 
 const Login = () => {
     const history = useHistory();
-    const { loggedIn, toggleLogin, setNewToken, success, error } = useContext(AppContext)
+    const { toggleLogin, setNewToken, success, error } = useContext(AppContext)
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -27,7 +27,7 @@ const Login = () => {
             })
             console.log(data)
             setNewToken(data.token)
-            if (!loggedIn) toggleLogin()
+            toggleLogin(true)
             success('Successfully Logged in')
             history.push('/user')
         } catch (e) {
@@ -65,7 +65,7 @@ const Login = () => {
                             <Form.Control onChange={onPasswordChange} type="password" placeholder="Password" />
                         </Form.Group>
                         <Button variant="outline-primary" onClick={login} type="submit" className="my-2">
-                            Submit
+                            Login
                         </Button>
                     </Form>
                 </Card>

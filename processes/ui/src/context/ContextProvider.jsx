@@ -25,8 +25,8 @@ export const AppProvider = (props) => {
         setToken(token)
     }
 
-    const toggleLogin = () => {
-        setLoggedIn(!loggedIn)
+    const toggleLogin = (state) => {
+        setLoggedIn(state)
     }
 
     const success = (message) => {

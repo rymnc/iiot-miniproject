@@ -8,7 +8,7 @@ const NavBar = () => {
   const history = useHistory()
 
   const logout = (e) => {
-    toggleLogin()
+    toggleLogin(false)
     localStorage.clear()
     history.push('/home')
   }
