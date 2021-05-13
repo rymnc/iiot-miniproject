@@ -1,7 +1,18 @@
-import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import React, { useContext } from "react";
+import { Navbar, Nav, Button } from "react-bootstrap";
+import { useHistory } from 'react-router-dom'
+import { AppContext } from "../context/ContextProvider";
 
 const NavBar = () => {
+  const { loggedIn, toggleLogin } = useContext(AppContext)
+  const history = useHistory()
+
+  const logout = (e) => {
+    toggleLogin()
+    localStorage.clear()
+    history.push('/home')
+  }
+
   return (
     <Navbar
       collapseOnSelect
@@ -19,6 +30,16 @@ const NavBar = () => {
           <Nav.Link href="/devices">Devices</Nav.Link>
           <Nav.Link href="/user">User</Nav.Link>
         </Nav>
+        <Navbar.Collapse className="justify-content-end">
+          <Nav className="mr-auto">
+            {
+              loggedIn === true ?
+                <Button variant="outline-danger" onClick={logout}>Logout</Button>
+                :
+                <Button variant="outline-info" href="/login">Login / Sign Up</Button>
+            }
+          </Nav>
+        </Navbar.Collapse>
       </Navbar.Collapse>
     </Navbar>
   );
