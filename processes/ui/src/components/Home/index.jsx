@@ -12,7 +12,7 @@ const Home = () => {
       try {
         const { data } = await apiClient.get("/health");
         if (data.healthy === true) {
-          success("Connected to API");
+          console.log("Connected to API");
         } else {
           error(
             "Something went wrong while connecting to the API",

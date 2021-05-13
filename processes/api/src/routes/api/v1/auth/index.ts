@@ -33,11 +33,11 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
           { expiresIn: "15m" }
         );
         await fastify.db.tokens.create({
-            data: {
-                userId: id,
-                type: "ACCESS",
-                value: token
-            }
+          data: {
+            userId: id,
+            type: "ACCESS",
+            value: token
+          }
         })
         reply.status(200).send({ token });
       } else {
@@ -63,6 +63,26 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       reply.status(200).send(true);
     }
   );
+
+  fastify.get(
+    "/validate"
+    , {
+      schema: {
+        response: {
+          200: {
+            type: "boolean",
+          },
+        },
+      },
+    }, async (request, reply) => {
+      try {
+        await request.jwtVerify()
+        reply.status(200).send(true)
+      } catch (e) {
+        reply.status(200).send(false)
+      }
+
+    })
 };
 
 export default auth;
