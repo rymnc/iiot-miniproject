@@ -5,7 +5,7 @@ export const apiClient = Axios.create({
 });
 
 apiClient.interceptors.request.use(request => {
-  const accessToken = localStorage.getItem('accessToken')
+  const accessToken = localStorage.getItem('token')
   if (accessToken) {
     request.headers.Authorization = `Bearer ${accessToken}`
   }

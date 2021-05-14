@@ -25,7 +25,6 @@ const Login = () => {
                 email,
                 password
             })
-            console.log(data)
             setNewToken(data.token)
             toggleLogin(true)
             success('Successfully Logged in')

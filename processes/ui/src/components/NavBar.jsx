@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { useHistory } from 'react-router-dom'
 import { AppContext } from "../context/ContextProvider";
 
 const NavBar = () => {
-  const { toggleLogin, validateToken } = useContext(AppContext)
+  const { toggleLogin, loggedIn } = useContext(AppContext)
   const history = useHistory()
 
   const logout = (e) => {
@@ -12,17 +12,6 @@ const NavBar = () => {
     toggleLogin(false)
     history.push('/')
   }
-
-  const [loggedIn, setLoggedIn] = useState(null)
-
-  useEffect(() => {
-    const validate = async () => {
-      const valid = await validateToken()
-      setLoggedIn(valid)
-    }
-    validate()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <Navbar
