@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AppContext } from "../../context/ContextProvider";
 
 const Home = () => {
-  const { success, error } = useContext(AppContext)
+  const { success, error } = useContext(AppContext);
 
   useEffect(() => {
     const pingBackend = async () => {
@@ -14,14 +14,10 @@ const Home = () => {
         if (data.healthy === true) {
           console.log("Connected to API");
         } else {
-          error(
-            "Something went wrong while connecting to the API",
-          );
+          error("Something went wrong while connecting to the API");
         }
       } catch (e) {
-        error(
-          "Something went wrong while connecting to the API"
-        );
+        error("Something went wrong while connecting to the API");
       }
     };
     pingBackend();
@@ -29,8 +25,7 @@ const Home = () => {
 
   return (
     <div>
-      <Container>
-      </Container>
+      <Container></Container>
     </div>
   );
 };

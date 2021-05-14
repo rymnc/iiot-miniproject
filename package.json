@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "api:dev": "yarn workspace api dev",
     "ui:dev": "yarn workspace ui start",
-    "lint": "npx prettier --write processes/**/*.ts processes/**/*.js*"
+    "lint": "npx prettier --write processes/"
   },
   "repository": {
     "type": "git",

@@ -1,22 +1,22 @@
 import React, { useContext } from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from "react-router-dom";
 import { AppContext } from "../context/ContextProvider";
 
 const NavBar = () => {
-  const { toggleLogin, loggedIn } = useContext(AppContext)
-  const history = useHistory()
+  const { toggleLogin, loggedIn } = useContext(AppContext);
+  const history = useHistory();
 
   const usePathname = () => {
     const location = useLocation();
     return location.pathname;
-  }
+  };
 
   const logout = (e) => {
-    localStorage.clear()
-    toggleLogin(false)
-    history.push('/')
-  }
+    localStorage.clear();
+    toggleLogin(false);
+    history.push("/");
+  };
 
   return (
     <Navbar
@@ -37,12 +37,15 @@ const NavBar = () => {
         </Nav>
         <Navbar.Collapse className="justify-content-end">
           <Nav className="mr-auto">
-            {
-              loggedIn === true ?
-                <Button variant="outline-danger" onClick={logout}>Logout</Button>
-                :
-                <Button variant="outline-info" href="/login">Login / Sign Up</Button>
-            }
+            {loggedIn === true ? (
+              <Button variant="outline-danger" onClick={logout}>
+                Logout
+              </Button>
+            ) : (
+              <Button variant="outline-info" href="/login">
+                Login / Sign Up
+              </Button>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar.Collapse>

@@ -36,9 +36,9 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
           data: {
             userId: id,
             type: "ACCESS",
-            value: token
-          }
-        })
+            value: token,
+          },
+        });
         reply.status(200).send({ token });
       } else {
         reply.unauthorized("Invalid email/password");
@@ -65,8 +65,8 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   );
 
   fastify.get(
-    "/validate"
-    , {
+    "/validate",
+    {
       schema: {
         response: {
           200: {
@@ -74,15 +74,16 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
           },
         },
       },
-    }, async (request, reply) => {
+    },
+    async (request, reply) => {
       try {
-        await request.jwtVerify()
-        reply.status(200).send(true)
+        await request.jwtVerify();
+        reply.status(200).send(true);
       } catch (e) {
-        reply.status(200).send(false)
+        reply.status(200).send(false);
       }
-
-    })
+    }
+  );
 };
 
 export default auth;
