@@ -1,11 +1,16 @@
 import React, { useContext } from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { AppContext } from "../context/ContextProvider";
 
 const NavBar = () => {
   const { toggleLogin, loggedIn } = useContext(AppContext)
   const history = useHistory()
+
+  const usePathname = () => {
+    const location = useLocation();
+    return location.pathname;
+  }
 
   const logout = (e) => {
     localStorage.clear()
@@ -25,7 +30,7 @@ const NavBar = () => {
       <Navbar.Brand href="/">IIoT Miniproject</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav activeKey={window.location.pathname} className="mr-auto">
+        <Nav activeKey={usePathname()} className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/devices">Devices</Nav.Link>
           <Nav.Link href="/user">User</Nav.Link>
