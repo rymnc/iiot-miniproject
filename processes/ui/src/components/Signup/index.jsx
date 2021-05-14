@@ -115,7 +115,7 @@ const Signup = () => {
               <Form.Control
                 onChange={onConfPassChange}
                 type="password"
-                placeholder="Password"
+                placeholder="Confirm Password"
               />
             </Form.Group>
 
