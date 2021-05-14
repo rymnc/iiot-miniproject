@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "api:dev": "yarn workspace api dev",
+    "api:dev": "PORT=5000 yarn workspace api dev",
     "ui:dev": "yarn workspace ui start",
     "lint": "npx prettier --write processes/"
   },
