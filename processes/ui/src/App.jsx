@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { AppProvider } from "./context/ContextProvider";
 import { PrivateRoute } from "./components/ProtectedRoute";
+import Profile from "./components/Profile";
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
         <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
-          <PrivateRoute path="/user" />
+          <PrivateRoute path="/user" component={Profile} />
           <PrivateRoute path="/devices" />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />

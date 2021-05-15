@@ -14,6 +14,7 @@ export const AppContext = createContext();
 
 export const AppProvider = (props) => {
   const history = useHistory();
+  const [userData, setUserData] = useState();
 
   const toastProps = useMemo(() => {
     return {
@@ -72,9 +73,22 @@ export const AppProvider = (props) => {
     validate();
   }, [history, validateToken]);
 
+  const updateUserData = (data) => {
+    setUserData(data);
+  };
+
   return (
     <AppContext.Provider
-      value={{ token, setNewToken, loggedIn, toggleLogin, success, error }}
+      value={{
+        token,
+        setNewToken,
+        loggedIn,
+        toggleLogin,
+        success,
+        error,
+        userData,
+        updateUserData,
+      }}
     >
       <ToastContainer />
       {props.children}

@@ -122,6 +122,7 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
             lastName: lname,
           },
         });
+        fastify.log.info(updated)
         reply.status(200).send(updated);
       }
     }
