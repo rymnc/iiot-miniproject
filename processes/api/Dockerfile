@@ -9,8 +9,10 @@ COPY package.json .
 
 RUN yarn install
 
+
 COPY --chown=node:node . .
 
+RUN npx prisma generate
 RUN yarn build:ts
 
 RUN rm -rf node_modules

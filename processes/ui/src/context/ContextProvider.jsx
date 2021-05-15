@@ -1,11 +1,12 @@
 import React, {
   createContext,
-  useState,
   useMemo,
   useEffect,
   useCallback,
 } from "react";
 import useToken from "../hooks/useToken";
+import useUserData from "../hooks/useUserData";
+import useAuthStatus from '../hooks/useAuth'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiClient } from "../services/axios";
@@ -14,7 +15,9 @@ export const AppContext = createContext();
 
 export const AppProvider = (props) => {
   const history = useHistory();
-  const [userData, setUserData] = useState();
+  const { userData, setUserData } = useUserData();
+  const { token, setToken } = useToken();
+  const { authStatus: loggedIn, setAuthStatus: setLoggedIn } = useAuthStatus();
 
   const toastProps = useMemo(() => {
     return {
@@ -27,9 +30,6 @@ export const AppProvider = (props) => {
       progress: undefined,
     };
   }, []);
-
-  const { token, setToken } = useToken();
-  const [loggedIn, setLoggedIn] = useState(null);
 
   const setNewToken = (token) => {
     setToken(token);
@@ -68,10 +68,10 @@ export const AppProvider = (props) => {
   useEffect(() => {
     const validate = async () => {
       const valid = await validateToken(false);
-      setLoggedIn(valid);
+      if (!valid) setLoggedIn(false);
     };
     validate();
-  }, [history, validateToken]);
+  }, [history, validateToken, setLoggedIn]);
 
   const updateUserData = (data) => {
     setUserData(data);
