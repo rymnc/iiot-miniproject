@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Card, Container, Form, Button, Col, Row } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { AppContext } from "../../context/ContextProvider";
 import { apiClient } from "../../services/axios";
 
 const Profile = () => {
     const { userData, updateUserData, success, error } = useContext(AppContext);
+    const history = useHistory()
     const [localUser, setLocalUser] = useState({
         firstName: "",
         lastName: "",
@@ -13,8 +15,13 @@ const Profile = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const { data } = await apiClient.get("/users/data");
-            updateUserData(data);
+            try {
+                const { data } = await apiClient.get("/users/data");
+                updateUserData(data);
+            } catch (e) {
+                if (e.response.status === 401) history.push('/login')
+            }
+
         };
         getData();
         // eslint-disable-next-line react-hooks/exhaustive-deps

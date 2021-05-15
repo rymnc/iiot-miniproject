@@ -30,7 +30,7 @@ const Login = () => {
       success("Successfully Logged in");
       history.push("/user");
     } catch (e) {
-      error(e.message);
+      if (e.response.status === 401 || 403) error('Invalid Email/Password')
     }
   };
 

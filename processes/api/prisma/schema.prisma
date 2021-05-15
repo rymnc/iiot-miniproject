@@ -1,25 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-enum DeviceTypes {
-  SENSOR
-  ASSISTANT
-  AUTOMATION
-  SECURITY
-}
-
-enum TokenType {
-  REFRESH
-  ACCESS
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -38,20 +23,34 @@ model DeviceDetails {
   id         Int         @id @default(autoincrement())
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @default(now())
-  user       User        @relation(fields: [userId], references: [id])
-  userId     Int        
+  userId     Int
   deviceId   String      @default(uuid())
   deviceType DeviceTypes
   healthy    Boolean     @default(true)
+  deviceName String
+  user       User        @relation(fields: [userId], references: [id])
+
+  @@unique([deviceName, userId], name: "device_name_unique_per_user")
 }
 
-// Using an entity in db instead of storing these in cache/redis
 model Tokens {
   id        Int       @id @default(autoincrement())
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now())
-  user      User      @relation(fields: [userId], references: [id])
-  userId    Int      
+  userId    Int
   type      TokenType
   value     String    @unique
+  user      User      @relation(fields: [userId], references: [id])
+}
+
+enum DeviceTypes {
+  SENSOR
+  ASSISTANT
+  AUTOMATION
+  SECURITY
+}
+
+enum TokenType {
+  REFRESH
+  ACCESS
 }

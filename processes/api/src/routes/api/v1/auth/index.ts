@@ -25,7 +25,7 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         },
       });
       if (user === null) {
-        reply.notFound("User not found");
+        reply.unauthorized("Invalid email/password");
       } else if (await compare(password, user.password)) {
         const { firstName, lastName, email, id } = user;
         const token = await fastify.jwt.sign(

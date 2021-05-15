@@ -14,11 +14,11 @@ const App = () => {
       <AppProvider>
         <NavBar />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <PrivateRoute path="/user" component={Profile} />
+          <Route exact path="/" render={() => <Home />} />
+          <PrivateRoute path="/user" render={() => <Profile />} />
           <PrivateRoute path="/devices" />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
+          <Route path="/login" render={() => <Login />} />
+          <Route path="/signup" render={() => <Signup />} />
         </Switch>
       </AppProvider>
     </BrowserRouter>
