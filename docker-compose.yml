@@ -24,6 +24,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:test_db@postgres:5432/mydb?schema=public
       - PORT=5000
+      - JWT_SECRET=9d9cdfcfc53d07a07225f05d901c70c5f0ba25debca58abee9b477dc9202d81d0d3221d208d292d78ffd26703ae0778ba6fc29c602ae285ab16af8259554894d
   ui:
     build: 
       context: processes/ui
