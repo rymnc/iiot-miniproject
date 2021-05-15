@@ -1,7 +1,6 @@
 import React, {
   createContext,
   useMemo,
-  useEffect,
   useCallback,
 } from "react";
 import useToken from "../hooks/useToken";
@@ -10,7 +9,8 @@ import useAuthStatus from '../hooks/useAuth'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiClient } from "../services/axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import useSWR from 'swr'
 export const AppContext = createContext();
 
 export const AppProvider = (props) => {
@@ -18,6 +18,11 @@ export const AppProvider = (props) => {
   const { userData, setUserData } = useUserData();
   const { token, setToken } = useToken();
   const { authStatus: loggedIn, setAuthStatus: setLoggedIn } = useAuthStatus();
+
+  const UsePathname = () => {
+    const location = useLocation();
+    return location.pathname;
+  };
 
   const toastProps = useMemo(() => {
     return {
@@ -53,25 +58,27 @@ export const AppProvider = (props) => {
     [toastProps]
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const validateToken = async (effect) => {
-    try {
-      const { data } = await apiClient.get("/auth/validate");
-      return data;
-    } catch (e) {
-      setNewToken(undefined);
-      toggleLogin(false);
-      return false;
+  const validator = async (url) => {
+    const { data } = await apiClient.get(url)
+    setLoggedIn(data)
+    if (data === false) {
+      console.log(UsePathname())
+      if (UsePathname() !== '/') history.push('/login')
     }
-  };
+  }
 
-  useEffect(() => {
-    const validate = async () => {
-      const valid = await validateToken(false);
-      if (!valid) setLoggedIn(false);
-    };
-    validate();
-  }, [history, validateToken, setLoggedIn]);
+  const userDataFetcher = async (url) => {
+    const { data } = await apiClient.get(url)
+    setUserData(data)
+  }
+
+  useSWR(loggedIn ? '/users/data' : null, userDataFetcher, {
+    refreshInterval: 120000
+  })
+
+  useSWR('/auth/validate', validator, {
+    refreshInterval: 120000
+  })
 
   const updateUserData = (data) => {
     setUserData(data);
