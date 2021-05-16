@@ -45,21 +45,18 @@ const Devices = () => {
     return (
         <Container fluid className="align-center" style={center}>
             <Col md={8} xs={12} lg={8} xl={6} sm={12}>
-                <Card className="p-2 justify-content-center shadow-lg" border="info">
+                <Card className="p-2 justify-content-center shadow-lg mx-3" border="info">
                     <SearchBar />
-                    <div className="panel panel-default">
-                        <Table striped bordered hover responsive="sm" className="rounded">
-                            <thead>
-                                <tr>
-                                    <Headings />
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <AllDevices deviceData={deviceData} />
-                            </tbody>
-                        </Table>
-                    </div>
-
+                    <Table striped bordered hover responsive="sm" className="rounded">
+                        <thead>
+                            <tr>
+                                <Headings />
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <AllDevices deviceData={deviceData} />
+                        </tbody>
+                    </Table>
                 </Card>
             </Col>
         </Container>
