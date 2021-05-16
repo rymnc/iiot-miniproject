@@ -68,8 +68,16 @@ export const AppProvider = (props) => {
   }
 
   const userDataFetcher = async (url) => {
-    const { data } = await apiClient.get(url)
-    setUserData(data)
+    try {
+      const { data } = await apiClient.get(url)
+      setUserData(data)
+    } catch (e) {
+      if (e?.response?.status === 401) {
+        history.push('/login')
+        error('Session Expired. Please Re-Login')
+      }
+    }
+
   }
 
   useSWR(loggedIn ? '/users/data' : null, userDataFetcher, {

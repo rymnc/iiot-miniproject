@@ -7,6 +7,7 @@ import Signup from "./components/Signup";
 import { AppProvider } from "./context/ContextProvider";
 import { PrivateRoute } from "./components/ProtectedRoute";
 import Profile from "./components/Profile";
+import Devices from "./components/Devices";
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={() => <Home />} />
           <PrivateRoute path="/user" component={() => <Profile />} />
-          <PrivateRoute path="/devices" />
+          <PrivateRoute path="/devices" component={() => <Devices />} />
           <Route path="/login" component={() => <Login />} />
           <Route path="/signup" component={() => <Signup />} />
         </Switch>

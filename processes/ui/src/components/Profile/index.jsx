@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Card, Container, Form, Button, Col, Row } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { AppContext } from "../../context/ContextProvider";
 import { apiClient } from "../../services/axios";
 
 const Profile = () => {
     const { userData, updateUserData, success, error } = useContext(AppContext);
+    const history = useHistory()
     const [localUser, setLocalUser] = useState({
         firstName: "",
         lastName: "",
@@ -42,6 +44,10 @@ const Profile = () => {
                 (input) => (input.value = "")
             );
         } catch (e) {
+            if (e?.response?.status === 401) {
+                history.push('/login')
+                error('Session Expired. Please Re-Login')
+            }
             error(e.message);
         }
     };
@@ -53,7 +59,7 @@ const Profile = () => {
     return (
         <Container fluid className="align-center" style={center}>
             <Col md="auto" xs={12} lg={4} xl={4} sm={12}>
-                <Card className="p-2 justify-content-center" border="info">
+                <Card className="p-2 justify-content-center shadow-lg" border="info">
                     <h2>User Profile</h2>
                     <Form onSubmit={update}>
                         <Form.Group as={Row} controlId="formBasicEmail" className="my-2 mx-auto">

@@ -68,7 +68,7 @@ const Signup = () => {
   return (
     <Container fluid className="align-center" style={center}>
       <Col md="auto" xs={12} lg={4} xl={4} sm={12}>
-        <Card className="p-2 justify-content-center" border="info">
+        <Card className="p-2 justify-content-center shadow-lg" border="info">
           <h2>Sign Up</h2>
           <Form onSubmit={signup}>
             <Form.Group controlId="formBasicEmail">
