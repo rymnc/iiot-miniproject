@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 
-const Field = ({ state, controlId, label, text, type, goodFeedback, badFeedback, onChange, placeholder, formOptions }) => {
+const Field = ({ state, controlId, label, text, type, goodFeedback, badFeedback, onChange, placeholder, formOptions, children }) => {
     return (
         <Form.Group controlId={controlId} id={controlId}>
             <Form.Label>{label}</Form.Label>
@@ -12,7 +12,10 @@ const Field = ({ state, controlId, label, text, type, goodFeedback, badFeedback,
                 placeholder={`${placeholder ?? 'Enter ' + label}`}
                 value={state}
                 {...formOptions}
-            />
+            >
+                {children}
+            </Form.Control>
+
             {
                 text && <Form.Text className="text-muted">
                     {text}

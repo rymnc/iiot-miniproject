@@ -22,31 +22,36 @@ const Devices = () => {
         transform: "translateY(-50%)",
     };
 
-    useEffect(() => {
-        const getDeviceData = async () => {
-            try {
-                const { data } = await apiClient.get('/devices/all')
-                setDeviceData(data)
-            } catch (e) {
-                if (e?.response?.status === 401) {
-                    history.push('/login')
-                    error('Session Expired. Please Re-Login')
-                } else {
-                    error('Could not fetch device data!')
-                }
+    const getDeviceData = async () => {
+        try {
+            const { data } = await apiClient.get('/devices/all')
+            setDeviceData(data)
+        } catch (e) {
+            if (e?.response?.status === 401) {
+                history.push('/login')
+                error('Session Expired. Please Re-Login')
+            } else {
+                error('Could not fetch device data!')
             }
-
         }
+
+    }
+    useEffect(() => {
+
         getDeviceData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const addNewDevice = async () => {
+        await getDeviceData()
+    }
 
 
     return (
         <Container fluid className="align-center" style={center}>
             <Col md={8} xs={12} lg={8} xl={6} sm={12}>
                 <Card className="p-2 justify-content-center shadow-lg mx-3" border="info">
-                    <SearchBar />
+                    <SearchBar addNewDevice={addNewDevice} />
                     <Table striped bordered hover responsive="sm" className="rounded">
                         <thead>
                             <tr>

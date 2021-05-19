@@ -1,4 +1,4 @@
-import { Button, Modal } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 
 const Popup = (props) => {
     return (
@@ -14,11 +14,8 @@ const Popup = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {props.children}
+                {props.body}
             </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
         </Modal>
     )
 }

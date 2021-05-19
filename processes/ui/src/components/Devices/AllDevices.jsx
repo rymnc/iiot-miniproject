@@ -9,7 +9,7 @@ const Devices = ({ deviceData: devices }) => {
                         <td>{i + 1}</td>
                         <td>{deviceName}</td>
                         <td>{deviceType}</td>
-                        <td>{healthy.toString()}</td>
+                        <td>{healthy === true ? 'YES' : 'NO'}</td>
                         <td>{new Date(createdAt).toDateString()}</td>
                     </tr>
                 )
