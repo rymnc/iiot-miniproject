@@ -52,7 +52,7 @@ const Devices = () => {
             <Col md={8} xs={12} lg={8} xl={6} sm={12}>
                 <Card className="p-2 justify-content-center shadow-lg mx-3" border="info">
                     <SearchBar addNewDevice={addNewDevice} />
-                    <Table striped bordered hover responsive="sm" className="rounded">
+                    <Table striped bordered hover responsive="sm" className="rounded" size="sm">
                         <thead>
                             <tr>
                                 <Headings />

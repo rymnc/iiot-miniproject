@@ -1,17 +1,12 @@
 import React from 'react'
+import Device from './Device'
 
 const Devices = ({ deviceData: devices }) => {
     if (devices?.length > 0) {
         return (
-            devices.map(({ deviceId, deviceName, deviceType, healthy, createdAt }, i) => {
+            devices.map((device, i) => {
                 return (
-                    <tr key={deviceId} className="text-center">
-                        <td>{i + 1}</td>
-                        <td>{deviceName}</td>
-                        <td>{deviceType}</td>
-                        <td>{healthy === true ? 'YES' : 'NO'}</td>
-                        <td>{new Date(createdAt).toDateString()}</td>
-                    </tr>
+                    <Device {...device} key={i} i={i} />
                 )
             })
         )
