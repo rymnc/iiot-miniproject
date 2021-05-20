@@ -24,7 +24,7 @@ model DeviceDetails {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @default(now())
   userId     Int
-  deviceId   String      @default(uuid())
+  deviceId   String      @unique @default(uuid())
   deviceType DeviceTypes
   healthy    Boolean     @default(true)
   deviceName String

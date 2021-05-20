@@ -26,6 +26,11 @@ const Query = Type.Object({
 })
 type QueryType = Static<typeof Query>;
 
+const DeleteDevice = Type.Object({
+    deviceId: Type.String()
+})
+type DeleteDeviceType = Static<typeof DeleteDevice>;
+
 export {
     Device,
     DeviceType,
@@ -35,4 +40,6 @@ export {
     DevicesType,
     Query,
     QueryType,
+    DeleteDevice,
+    DeleteDeviceType
 }

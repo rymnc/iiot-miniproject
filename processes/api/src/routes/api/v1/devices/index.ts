@@ -9,6 +9,8 @@ import {
     Query,
     // Unsafe type
     QueryType,
+    DeleteDevice,
+    DeleteDeviceType
 } from './schemas'
 const devices: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     fastify.get("/", async (request, reply) => {
@@ -77,6 +79,38 @@ const devices: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         } else {
             const devices: Array<DeviceDetails> = await fastify.db.$queryRaw(`SELECT ` + columns + ` FROM "DeviceDetails" WHERE \"userId\"=${user.id} AND` + where)
             reply.status(200).send(devices)
+        }
+
+
+    })
+
+    fastify.delete<{ Querystring: DeleteDeviceType }>('/delete', {
+        schema: {
+            querystring: DeleteDevice,
+            response: {
+                203: {
+                    type: 'boolean'
+                }
+            }
+        }
+    }, async (request, reply) => {
+        const { deviceId } = request.query;
+        const { email } = await request.jwtVerify()
+        const user = await fastify.db.user.findUnique({ where: { email } })
+        if (user === null) {
+            reply.notFound('User not found')
+        } else {
+            const device = await fastify.db.deviceDetails.findUnique({ where: { deviceId } })
+            if (device === null) {
+                reply.notFound('Device not found')
+            } else {
+                if (device.userId === user.id) {
+                    await fastify.db.deviceDetails.delete({ where: { deviceId } })
+                } else {
+                    reply.unauthorized('You cannot delete this device!')
+                }
+            }
+            reply.status(203).send(true)
         }
 
 

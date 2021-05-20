@@ -51,15 +51,16 @@ const Devices = () => {
         <Container fluid className="align-center" style={center}>
             <Col md={8} xs={12} lg={8} xl={6} sm={12}>
                 <Card className="p-2 justify-content-center shadow-lg mx-3" border="info">
+                    {deviceData.length === 0 ? <p>Looks like you have no devices! Press the "+" button to add one!</p> : null}
                     <SearchBar addNewDevice={addNewDevice} />
                     <Table striped bordered hover responsive="sm" className="rounded" size="sm">
                         <thead>
                             <tr>
-                                <Headings />
+                                {deviceData.length > 0 ? <Headings /> : null}
                             </tr>
                         </thead>
                         <tbody>
-                            <AllDevices deviceData={deviceData} />
+                            <AllDevices deviceData={deviceData} updateList={addNewDevice} />
                         </tbody>
                     </Table>
                 </Card>
