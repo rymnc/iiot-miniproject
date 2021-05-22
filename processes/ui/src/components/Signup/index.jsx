@@ -7,13 +7,13 @@ import Field from "./Field";
 
 const Signup = () => {
   const history = useHistory();
-  const [validated, setValidated] = useState(false)
+  const [validated, setValidated] = useState(false);
   const { success, error } = useContext(AppContext);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [confirmPass, setConfirmPass] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
 
   const onEmailChange = (e) => {
     setEmail(e.target.value);
@@ -36,13 +36,13 @@ const Signup = () => {
   };
 
   const signup = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.stopPropagation();
       return;
     }
-    setValidated(true)
+    setValidated(true);
     const payload = {
       firstName,
       lastName,
@@ -113,7 +113,9 @@ const Signup = () => {
               controlId={"formBasicPassword"}
               label={"Password"}
               onChange={onPasswordChange}
-              text={"Your password must be 8-20 characters long, contain letters and numbers"}
+              text={
+                "Your password must be 8-20 characters long, contain letters and numbers"
+              }
               type={"password"}
               key={"password"}
               formOptions={{ minLength: 8, maxLength: 20 }}

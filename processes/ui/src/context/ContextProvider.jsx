@@ -1,16 +1,12 @@
-import React, {
-  createContext,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { createContext, useMemo, useCallback } from "react";
 import useToken from "../hooks/useToken";
 import useUserData from "../hooks/useUserData";
-import useAuthStatus from '../hooks/useAuth'
+import useAuthStatus from "../hooks/useAuth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiClient } from "../services/axios";
 import { useHistory, useLocation } from "react-router-dom";
-import useSWR from 'swr'
+import useSWR from "swr";
 export const AppContext = createContext();
 
 export const AppProvider = (props) => {
@@ -59,34 +55,33 @@ export const AppProvider = (props) => {
   );
 
   const validator = async (url) => {
-    const { data } = await apiClient.get(url)
-    setLoggedIn(data)
+    const { data } = await apiClient.get(url);
+    setLoggedIn(data);
     if (data === false) {
-      console.log(UsePathname())
-      if (UsePathname() !== '/') history.push('/login')
+      console.log(UsePathname());
+      if (UsePathname() !== "/") history.push("/login");
     }
-  }
+  };
 
   const userDataFetcher = async (url) => {
     try {
-      const { data } = await apiClient.get(url)
-      setUserData(data)
+      const { data } = await apiClient.get(url);
+      setUserData(data);
     } catch (e) {
       if (e?.response?.status === 401) {
-        history.push('/login')
-        error('Session Expired. Please Re-Login')
+        history.push("/login");
+        error("Session Expired. Please Re-Login");
       }
     }
+  };
 
-  }
+  useSWR(loggedIn ? "/users/data" : null, userDataFetcher, {
+    refreshInterval: 120000,
+  });
 
-  useSWR(loggedIn ? '/users/data' : null, userDataFetcher, {
-    refreshInterval: 120000
-  })
-
-  useSWR('/auth/validate', validator, {
-    refreshInterval: 120000
-  })
+  useSWR("/auth/validate", validator, {
+    refreshInterval: 120000,
+  });
 
   const updateUserData = (data) => {
     setUserData(data);
