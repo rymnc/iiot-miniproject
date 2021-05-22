@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import Device from './Device'
 import { apiClient } from '../../services/axios'
 import { AppContext } from '../../context/ContextProvider'
@@ -6,9 +6,7 @@ import { DeviceContext } from './DeviceContext'
 
 const Devices = () => {
     const { deviceData, addNewDevice: updateList } = useContext(DeviceContext)
-    useEffect(() => {
-        console.log('update received: ', deviceData)
-    }, [deviceData])
+
     const { success, error } = useContext(AppContext)
 
     const deleteDevice = async (deviceId) => {
@@ -28,7 +26,7 @@ const Devices = () => {
         deviceData &&
         deviceData.map((device, i) => {
             console.log(i, device)
-            return <Device {...device} key={device.deviceId} deleteDevice={async (id) => await deleteDevice(id)} />
+            return <Device {...device} key={device.deviceId} deleteDevice={deleteDevice} />
 
         })
     )

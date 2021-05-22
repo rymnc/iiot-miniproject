@@ -9,7 +9,7 @@ export const DeviceProvider = (props) => {
     const { error } = useContext(AppContext)
     const [deviceData, setDeviceData] = useState([])
     const history = useHistory()
-    const updateDeviceData = (array) => setDeviceData(array)
+    const updateDeviceData = (array) => setDeviceData([...array])
 
     const getDeviceData = useCallback(async () => {
         try {
@@ -50,7 +50,7 @@ export const DeviceProvider = (props) => {
         let modifier;
         switch (header) {
             case 'Id':
-                modifier = getStringModifier('Id')
+                modifier = getStringModifier('deviceId')
                 break;
             case 'Device Name':
                 modifier = getStringModifier('deviceName')

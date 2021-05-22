@@ -14,7 +14,6 @@ const center = {
 
 
 const Devices = () => {
-    console.log('am here')
     return (
         <Container fluid className="align-center" style={center}>
             <Col md={8} xs={12} lg={8} xl={6} sm={12}>
