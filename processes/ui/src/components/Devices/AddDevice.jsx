@@ -44,7 +44,7 @@ const AddDevice = ({ addNewDevice, onHide }) => {
         try {
             await apiClient.post('/devices/new', payload)
             success('Added Device!')
-            addNewDevice()
+            addNewDevice(payload)
             // Quick reset of state
             setState(defaultState)
         } catch (e) {

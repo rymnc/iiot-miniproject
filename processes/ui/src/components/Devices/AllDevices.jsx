@@ -1,9 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Device from './Device'
 import { apiClient } from '../../services/axios'
 import { AppContext } from '../../context/ContextProvider'
+import { DeviceContext } from './DeviceContext'
 
-const Devices = ({ deviceData: devices, updateList }) => {
+const Devices = () => {
+    const { deviceData, addNewDevice: updateList } = useContext(DeviceContext)
+    useEffect(() => {
+        console.log('update received: ', deviceData)
+    }, [deviceData])
     const { success, error } = useContext(AppContext)
 
     const deleteDevice = async (deviceId) => {
@@ -19,15 +24,15 @@ const Devices = ({ deviceData: devices, updateList }) => {
         }
     }
 
-    if (devices?.length > 0) {
-        return (
-            devices.map((device, i) => {
-                return (
-                    <Device {...device} key={i} i={i} deleteDevice={(id) => deleteDevice(id)} />
-                )
-            })
-        )
-    } else return null
+    return (
+        deviceData &&
+        deviceData.map((device, i) => {
+            console.log(i, device)
+            return <Device {...device} key={device.deviceId} deleteDevice={async (id) => await deleteDevice(id)} />
+
+        })
+    )
+
 }
 
 export default Devices

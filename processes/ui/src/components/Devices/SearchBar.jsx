@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Col, Container } from 'react-bootstrap'
 import Modal from '../Modal'
 import AddDevice from './AddDevice'
+import { DeviceContext } from './DeviceContext'
 
-const SearchBar = ({ addNewDevice }) => {
+const SearchBar = () => {
+    const { addNewDevice } = useContext(DeviceContext)
     const [show, setShow] = useState(false)
 
 
