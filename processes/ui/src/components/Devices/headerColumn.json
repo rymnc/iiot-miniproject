@@ -1,0 +1,7 @@
+{
+    "deviceId": "Id",
+    "deviceName": "Device Name",
+    "deviceType": "Device Type",
+    "healthy": "Healthy?",
+    "createdAt": "Added on"
+}

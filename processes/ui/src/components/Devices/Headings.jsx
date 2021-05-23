@@ -2,13 +2,12 @@ import React, { useContext, useState } from "react";
 import { CaretUpFilled, CaretDown, CaretUp, CaretDownFilled } from "./Carets";
 import { DeviceContext } from "./DeviceContext";
 
-const headings = ["Id", "Device Name", "Device Type", "Healthy?", "Added on"];
-
 const initialState = [null, null];
 
 const Headings = () => {
-  const { sortBy } = useContext(DeviceContext);
+  const { sortBy, headings } = useContext(DeviceContext);
   const [currentOrdered, setCurrentOrdered] = useState(initialState);
+
 
   const modifier = (header, order) => {
     setCurrentOrdered([header, order]);
@@ -35,7 +34,7 @@ const Headings = () => {
     };
   };
 
-  return headings.map((header, i) => (
+  return headings.filter((headings) => headings[1] === true).map(([header], i) => (
     <th className="text-center" key={i}>
       {header}
       {isHighlighted(header, "asc") ? (

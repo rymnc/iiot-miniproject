@@ -17,6 +17,10 @@ export const DeviceProvider = (props) => {
   const history = useHistory();
   const updateDeviceData = (array) => setDeviceData([...array]);
 
+  const [headings, setHeadings] = useState(require('./headings.json'))
+  const updateHeadings = (headers) => setHeadings([...headers])
+
+
   const getDeviceData = useCallback(async () => {
     try {
       const { data } = await apiClient.get("/devices/all");
@@ -85,7 +89,7 @@ export const DeviceProvider = (props) => {
 
   return (
     <DeviceContext.Provider
-      value={{ deviceData, updateDeviceData, sortBy, addNewDevice }}
+      value={{ deviceData, updateDeviceData, sortBy, addNewDevice, headings, updateHeadings }}
     >
       {props.children}
     </DeviceContext.Provider>

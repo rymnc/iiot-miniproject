@@ -17,7 +17,7 @@ const Device = ({
       onMouseOver={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
     >
-      <OverlayTrigger
+      {deviceId && <OverlayTrigger
         key={deviceId}
         placement="top"
         overlay={<Tooltip id={`tooltip-${deviceId}`}>{deviceId}</Tooltip>}
@@ -29,10 +29,11 @@ const Device = ({
           )}`}
         </td>
       </OverlayTrigger>
-      <td>{deviceName}</td>
-      <td>{deviceType}</td>
-      <td>{healthy === true ? "YES" : "NO"}</td>
-      <td>
+      }
+      {deviceName && <td>{deviceName}</td>}
+      {deviceType && <td>{deviceType}</td>}
+      {healthy !== undefined && <td>{healthy === true ? "YES" : "NO"}</td>}
+      {createdAt && <td>
         <div
           className="flex"
           style={{
@@ -52,7 +53,7 @@ const Device = ({
             />
           }
         </div>
-      </td>
+      </td>}
     </tr>
   );
 };

@@ -4,7 +4,7 @@ const Popup = (props) => {
   return (
     <Modal
       {...props}
-      size="lg"
+      size={props.size}
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >

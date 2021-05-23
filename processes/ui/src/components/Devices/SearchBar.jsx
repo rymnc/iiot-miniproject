@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
-import { Button, Col, Container } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import Modal from "../Modal";
 import AddDevice from "./AddDevice";
+import Filters from "./Filters"
 import { DeviceContext } from "./DeviceContext";
 
 const SearchBar = () => {
@@ -14,30 +15,38 @@ const SearchBar = () => {
 
   return (
     <Container className="mb-3">
-      <Col style={addStyle} className="mx-1">
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => setShow(true)}
-          className="rounded"
-        >
-          <img
-            src="https://img.icons8.com/android/24/ffffff/plus.png"
-            alt="Plus Symbol"
-          />
-        </Button>
-        <Modal
-          show={show}
-          onHide={() => setShow(false)}
-          title={"Add a Device"}
-          body={
-            <AddDevice
-              onHide={() => setShow(false)}
-              addNewDevice={addNewDevice}
+
+      <Row>
+        <Col>
+          <Filters />
+        </Col>
+        <Col style={addStyle}>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => setShow(true)}
+            className="rounded"
+          >
+            <img
+              src="https://img.icons8.com/android/24/ffffff/plus.png"
+              alt="Plus Symbol"
             />
-          }
-        />
-      </Col>
+          </Button>
+          <Modal
+            show={show}
+            onHide={() => setShow(false)}
+            size={"lg"}
+            title={"Add a Device"}
+            body={
+              <AddDevice
+                onHide={() => setShow(false)}
+                addNewDevice={addNewDevice}
+              />
+            }
+          />
+        </Col>
+      </Row>
+
     </Container>
   );
 };

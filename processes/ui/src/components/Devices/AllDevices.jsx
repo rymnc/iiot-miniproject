@@ -3,9 +3,10 @@ import Device from "./Device";
 import { apiClient } from "../../services/axios";
 import { AppContext } from "../../context/ContextProvider";
 import { DeviceContext } from "./DeviceContext";
+import * as relation from './headerColumn.json'
 
 const Devices = () => {
-  const { deviceData, addNewDevice: updateList } = useContext(DeviceContext);
+  const { deviceData, addNewDevice: updateList, headings } = useContext(DeviceContext);
 
   const { success, error } = useContext(AppContext);
 
@@ -26,9 +27,15 @@ const Devices = () => {
   return (
     deviceData &&
     deviceData.map((device, i) => {
-      console.log(i, device);
+      const filteredItems = Object.keys(device)
+        .filter((field) => {
+          return headings.filter((h) => h[1] === true).map((h) => h[0]).includes(relation.default[field])
+        })
+      console.log('filtered:', filteredItems)
+      const deviceObj = {}
+      filteredItems.forEach((item) => deviceObj[item] = device[item])
       return (
-        <Device {...device} key={device.deviceId} deleteDevice={deleteDevice} />
+        <Device {...deviceObj} key={device.deviceId} deleteDevice={deleteDevice} />
       );
     })
   );
