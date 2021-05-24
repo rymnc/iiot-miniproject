@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { Container } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { apiClient } from "../../services/axios";
 import "react-toastify/dist/ReactToastify.css";
 import { AppContext } from "../../context/ContextProvider";
+import "../height.css"
 
 const Home = () => {
   const { success, error } = useContext(AppContext);
@@ -24,8 +25,8 @@ const Home = () => {
   }, [error, success]);
 
   return (
-    <div>
-      <Container></Container>
+    <div id="main" >
+      <Image src={'./white_logo_transparent.png'} className="logo" />
     </div>
   );
 };

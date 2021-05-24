@@ -3,7 +3,7 @@ import { Container, Col, Card } from "react-bootstrap";
 import { DeviceProvider } from "./DeviceContext";
 import Main from "./Main";
 
-const center = {
+export const center = {
   textAlign: "-webkit-center",
   margin: "0",
   position: "absolute",
