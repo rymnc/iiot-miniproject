@@ -4,7 +4,7 @@ import { AppContext } from "../../context/ContextProvider";
 import { apiClient } from "../../services/axios";
 import Field from "../Signup/Field";
 
-const TYPES = ["SENSOR", "ASSISTANT", "AUTOMATION", "SECURITY"];
+export const TYPES = ["SENSOR", "ASSISTANT", "AUTOMATION", "SECURITY"];
 
 const defaultState = {
   deviceName: "",
