@@ -31,7 +31,6 @@ const Devices = () => {
         .filter((field) => {
           return headings.filter((h) => h[1] === true).map((h) => h[0]).includes(relation.default[field])
         })
-      console.log('filtered:', filteredItems)
       const deviceObj = {}
       filteredItems.forEach((item) => deviceObj[item] = device[item])
       return (

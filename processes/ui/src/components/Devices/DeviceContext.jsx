@@ -24,7 +24,6 @@ export const DeviceProvider = (props) => {
   const getDeviceData = useCallback(async () => {
     try {
       const { data } = await apiClient.get("/devices/all");
-      console.log("setting");
       updateDeviceData(data);
     } catch (e) {
       if (e?.response?.status === 401) {
@@ -38,7 +37,6 @@ export const DeviceProvider = (props) => {
 
   useEffect(() => {
     getDeviceData();
-    console.log("got device");
   }, [getDeviceData]);
 
   const getStringModifier = (field) => {

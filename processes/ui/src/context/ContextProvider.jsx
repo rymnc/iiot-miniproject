@@ -58,7 +58,6 @@ export const AppProvider = (props) => {
     const { data } = await apiClient.get(url);
     setLoggedIn(data);
     if (data === false) {
-      console.log(UsePathname());
       if (UsePathname() !== "/") history.push("/login");
     }
   };
