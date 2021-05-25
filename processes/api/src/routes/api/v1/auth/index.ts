@@ -39,6 +39,13 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
             value: token,
           },
         });
+        await fastify.db.userActions.create({
+          data: {
+            table: 'Tokens',
+            type: 'CREATE',
+            userId: user.id
+          }
+        })
         reply.status(200).send({ token });
       } else {
         reply.unauthorized("Invalid email/password");

@@ -17,6 +17,7 @@ model User {
   password      String
   DeviceDetails DeviceDetails[]
   Tokens        Tokens[]
+  UserActions   UserActions[]
 }
 
 model DeviceDetails {
@@ -43,6 +44,15 @@ model Tokens {
   user      User      @relation(fields: [userId], references: [id])
 }
 
+model UserActions {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  userId    Int
+  type      ActionType
+  table     Tables
+  user      User       @relation(fields: [userId], references: [id])
+}
+
 enum DeviceTypes {
   SENSOR
   ASSISTANT
@@ -53,4 +63,18 @@ enum DeviceTypes {
 enum TokenType {
   REFRESH
   ACCESS
+}
+
+enum ActionType {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+}
+
+enum Tables {
+  User
+  DeviceDetails
+  Tokens
+  UserActions
 }
