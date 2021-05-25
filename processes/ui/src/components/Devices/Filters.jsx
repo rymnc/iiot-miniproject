@@ -15,7 +15,7 @@ const Checkbox = ({ header, onChange, status, onNestedChange, currentNested }) =
                         This is a temporary nested drop down. Ideally we would have a generic implementation,
                         but for the sake of a demo, it has been hardcoded
                      */}
-                    {TYPES.map((deviceType) => <FormCheck checked={deviceType === currentNested} inline type={'radio'} label={deviceType} key={`nested-${deviceType}`} onChange={() => onNestedChange('deviceType', deviceType)} />)}
+                    {TYPES.map((deviceType) => <FormCheck readOnly checked={deviceType === currentNested} inline type={'radio'} label={deviceType} key={`nested-${deviceType}`} onClick={() => onNestedChange('deviceType', deviceType)} />)}
                 </>
             }
         </>
@@ -47,7 +47,7 @@ const Filters = () => {
     const { headings, updateHeadings } = useContext(DeviceContext)
     const [showColumnFilter, setShowCF] = useState(false)
     const [localHeadings, setLocalHeadings] = useState(headings)
-    const [nestedChange, setNestedChange] = useState()
+    const [nestedChange, setNestedChange] = useState(`"deviceType"='SENSOR'`)
     const [currentNested, setCurrentNested] = useState('SENSOR')
     const onHide = () => setShowCF(false)
 
