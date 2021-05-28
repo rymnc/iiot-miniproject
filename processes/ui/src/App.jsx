@@ -8,7 +8,7 @@ import { AppProvider } from "./context/ContextProvider";
 import { PrivateRoute } from "./components/ProtectedRoute";
 import Profile from "./components/Profile";
 import Devices from "./components/Devices";
-import './components/height.css'
+import "./components/height.css";
 
 const App = () => {
   return (
@@ -16,9 +16,8 @@ const App = () => {
       <AppProvider>
         <NavBar />
         <Switch>
-
           <Route exact path="/" component={() => <Home />} />
-          <PrivateRoute path="/user" >
+          <PrivateRoute path="/user">
             <Profile />
           </PrivateRoute>
           <PrivateRoute path="/devices">
@@ -26,7 +25,6 @@ const App = () => {
           </PrivateRoute>
           <Route path="/login" component={() => <Login />} />
           <Route path="/signup" component={() => <Signup />} />
-
         </Switch>
       </AppProvider>
     </BrowserRouter>

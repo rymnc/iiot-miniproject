@@ -17,43 +17,46 @@ const Device = ({
       onMouseOver={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
     >
-      {deviceId && <OverlayTrigger
-        key={deviceId}
-        placement="top"
-        overlay={<Tooltip id={`tooltip-${deviceId}`}>{deviceId}</Tooltip>}
-      >
-        <td>
-          {`${deviceId.substring(0, 3)}...${deviceId.substring(
-            deviceId.length - 3,
-            deviceId.length
-          )}`}
-        </td>
-      </OverlayTrigger>
-      }
+      {deviceId && (
+        <OverlayTrigger
+          key={deviceId}
+          placement="top"
+          overlay={<Tooltip id={`tooltip-${deviceId}`}>{deviceId}</Tooltip>}
+        >
+          <td>
+            {`${deviceId.substring(0, 3)}...${deviceId.substring(
+              deviceId.length - 3,
+              deviceId.length
+            )}`}
+          </td>
+        </OverlayTrigger>
+      )}
       {deviceName && <td>{deviceName}</td>}
       {deviceType && <td>{deviceType}</td>}
       {healthy !== undefined && <td>{healthy === true ? "YES" : "NO"}</td>}
-      {createdAt && <td>
-        <div
-          className="flex"
-          style={{
-            position: "relative",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Col md={1} />
-          {new Date(createdAt).toDateString()}
-          {
-            <Button
-              className="btn-close"
-              onClick={() => deleteDevice(deviceId)}
-              variant="outline-danger"
-              style={{ visibility: show ? "visible" : "hidden" }}
-            />
-          }
-        </div>
-      </td>}
+      {createdAt && (
+        <td>
+          <div
+            className="flex"
+            style={{
+              position: "relative",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Col md={1} />
+            {new Date(createdAt).toDateString()}
+            {
+              <Button
+                className="btn-close"
+                onClick={() => deleteDevice(deviceId)}
+                variant="outline-danger"
+                style={{ visibility: show ? "visible" : "hidden" }}
+              />
+            }
+          </div>
+        </td>
+      )}
     </tr>
   );
 };

@@ -37,11 +37,11 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       });
       await fastify.db.userActions.create({
         data: {
-          table: 'User',
-          type: 'CREATE',
-          userId: newUser.id
-        }
-      })
+          table: "User",
+          type: "CREATE",
+          userId: newUser.id,
+        },
+      });
       reply.status(201).send(newUser);
     }
   );
@@ -66,11 +66,11 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       if (user) {
         await fastify.db.userActions.create({
           data: {
-            table: 'User',
-            type: 'READ',
-            userId: user.id
-          }
-        })
+            table: "User",
+            type: "READ",
+            userId: user.id,
+          },
+        });
         reply.status(200).send(user);
       } else {
         reply.notFound("User not found");
@@ -99,11 +99,11 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       if (user) {
         await fastify.db.userActions.create({
           data: {
-            table: 'User',
-            type: 'DELETE',
-            userId: user.id
-          }
-        })
+            table: "User",
+            type: "DELETE",
+            userId: user.id,
+          },
+        });
         reply.status(203).send(true);
       } else {
         reply.notFound("User not found");
@@ -146,11 +146,11 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         fastify.log.info(updated);
         await fastify.db.userActions.create({
           data: {
-            table: 'User',
-            type: 'UPDATE',
-            userId: user.id
-          }
-        })
+            table: "User",
+            type: "UPDATE",
+            userId: user.id,
+          },
+        });
         reply.status(200).send(updated);
       }
     }

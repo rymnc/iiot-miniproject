@@ -1,32 +1,30 @@
 body > #root > #main {
-    height: 80vh;
+  height: 80vh;
 }
 
-
 body > #root {
-    height: 100vh;
+  height: 100vh;
 }
 
 .logo {
-    height: 50%!important;
-    width: 50%!important;
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    text-align: -webkit-center;
+  height: 50% !important;
+  width: 50% !important;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: -webkit-center;
 }
 
-@media (max-width: 576px) { 
-    .logo {
-        height: 20%!important;
-        width: 75%!important;
-        left: 13%
-    }
- }
-
+@media (max-width: 576px) {
+  .logo {
+    height: 20% !important;
+    width: 75% !important;
+    left: 13%;
+  }
+}
 
 .noheight {
-    height: 0
+  height: 0;
 }

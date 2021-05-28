@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import Modal from "../Modal";
 import AddDevice from "./AddDevice";
-import Filters from "./Filters"
+import Filters from "./Filters";
 import { DeviceContext } from "./DeviceContext";
 
 const SearchBar = () => {
@@ -15,7 +15,6 @@ const SearchBar = () => {
 
   return (
     <Container className="mb-3">
-
       <Row>
         <Col>
           <Filters />
@@ -46,7 +45,6 @@ const SearchBar = () => {
           />
         </Col>
       </Row>
-
     </Container>
   );
 };

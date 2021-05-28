@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  id            Int             @id @default(autoincrement())
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @default(now())
-  firstName     String
-  lastName      String?
-  email         String          @unique
-  password      String
-  DeviceDetails DeviceDetails[]
-  Tokens        Tokens[]
-  UserActions   UserActions[]
+  id               Int                @id @default(autoincrement())
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @default(now())
+  firstName        String
+  lastName         String?
+  email            String             @unique
+  password         String
+  DeviceDetails    DeviceDetails[]
+  Tokens           Tokens[]
+  UserActions      UserActions[]
+  UserLoginHistory UserLoginHistory[]
 }
 
 model DeviceDetails {
@@ -51,6 +52,13 @@ model UserActions {
   type      ActionType
   table     Tables
   user      User       @relation(fields: [userId], references: [id])
+}
+
+model UserLoginHistory {
+  id         Int      @id @default(autoincrement())
+  loggedInAt DateTime @default(now())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
 }
 
 enum DeviceTypes {

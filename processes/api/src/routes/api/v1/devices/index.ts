@@ -48,11 +48,11 @@ const devices: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         });
         await fastify.db.userActions.create({
           data: {
-            table: 'DeviceDetails',
-            type: 'CREATE',
-            userId: user.id
-          }
-        })
+            table: "DeviceDetails",
+            type: "CREATE",
+            userId: user.id,
+          },
+        });
         reply.status(201).send(device);
       }
     }
@@ -78,11 +78,11 @@ const devices: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         });
         await fastify.db.userActions.create({
           data: {
-            table: 'DeviceDetails',
-            type: 'READ',
-            userId: user.id
-          }
-        })
+            table: "DeviceDetails",
+            type: "READ",
+            userId: user.id,
+          },
+        });
         reply.status(200).send(devices);
       }
     }
@@ -105,17 +105,17 @@ const devices: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       } else {
         const devices: Array<DeviceDetails> = await fastify.db.$queryRaw(
           `SELECT ` +
-          columns +
-          ` FROM "DeviceDetails" WHERE \"userId\"=${user.id} AND` +
-          where
+            columns +
+            ` FROM "DeviceDetails" WHERE \"userId\"=${user.id} AND` +
+            where
         );
         await fastify.db.userActions.create({
           data: {
-            table: 'DeviceDetails',
-            type: 'READ',
-            userId: user.id
-          }
-        })
+            table: "DeviceDetails",
+            type: "READ",
+            userId: user.id,
+          },
+        });
         reply.status(200).send(devices);
       }
     }
@@ -154,11 +154,11 @@ const devices: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         }
         await fastify.db.userActions.create({
           data: {
-            table: 'DeviceDetails',
-            type: 'DELETE',
-            userId: user.id
-          }
-        })
+            table: "DeviceDetails",
+            type: "DELETE",
+            userId: user.id,
+          },
+        });
         reply.status(203).send(true);
       }
     }

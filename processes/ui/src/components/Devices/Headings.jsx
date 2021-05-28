@@ -8,7 +8,6 @@ const Headings = () => {
   const { sortBy, headings } = useContext(DeviceContext);
   const [currentOrdered, setCurrentOrdered] = useState(initialState);
 
-
   const modifier = (header, order) => {
     setCurrentOrdered([header, order]);
     if (header === null) {
@@ -34,21 +33,23 @@ const Headings = () => {
     };
   };
 
-  return headings.filter((headings) => headings[1] === true).map(([header], i) => (
-    <th className="text-center" key={i}>
-      {header}
-      {isHighlighted(header, "asc") ? (
-        <CaretUpFilled {...deactivate()} />
-      ) : (
-        <CaretUp {...activate(header, "asc")} />
-      )}
-      {isHighlighted(header, "desc") ? (
-        <CaretDownFilled {...deactivate()} />
-      ) : (
-        <CaretDown {...activate(header, "desc")} />
-      )}
-    </th>
-  ));
+  return headings
+    .filter((headings) => headings[1] === true)
+    .map(([header], i) => (
+      <th className="text-center" key={i}>
+        {header}
+        {isHighlighted(header, "asc") ? (
+          <CaretUpFilled {...deactivate()} />
+        ) : (
+          <CaretUp {...activate(header, "asc")} />
+        )}
+        {isHighlighted(header, "desc") ? (
+          <CaretDownFilled {...deactivate()} />
+        ) : (
+          <CaretDown {...activate(header, "desc")} />
+        )}
+      </th>
+    ));
 };
 
 export default Headings;

@@ -1,22 +1,7 @@
 [
-    [
-        "Id",
-        true
-    ],
-    [
-        "Device Name",
-        true
-    ],
-    [
-        "Device Type",
-        true
-    ],
-    [
-        "Healthy?",
-        true
-    ],
-    [
-        "Added on",
-        true
-    ]
+  ["Id", true],
+  ["Device Name", true],
+  ["Device Type", true],
+  ["Healthy?", true],
+  ["Added on", true]
 ]
